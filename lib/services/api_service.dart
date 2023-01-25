@@ -13,7 +13,7 @@ class RemoteService {
       //
       var jsonString = response.body;
       NewsAPi newsAPi = newsAPiFromJson(response.body);
-      return newsAPi.articles;
+      return 
     } else {
       return null;
     }
