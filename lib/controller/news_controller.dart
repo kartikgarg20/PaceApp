@@ -25,7 +25,7 @@ class NewsController extends GetxController {
   Future<void> checkInterntt() async {
     bool result = await InternetConnectionChecker().hasConnection;
     if (result == true) {
-      fetchNews();
+      fetchNews1();
 
       print('YAY! Free cute dog pics!');
     } else {
@@ -48,7 +48,7 @@ class NewsController extends GetxController {
     }
   }
 
-  void fetchNews() async {
+  void fetchNews1() async {
     try {
       isLoading(true);
       netResult(true);

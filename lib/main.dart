@@ -26,6 +26,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.black,
+
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
