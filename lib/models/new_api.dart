@@ -4,6 +4,12 @@
 
 import 'dart:convert';
 
+// List<NewsAPi> newsAPiFromJson(Map<String, dynamic> json) =>
+//     List<NewsAPi>.from(json.decode(json).map((x) => NewsAPi.fromJson(x)));
+
+// String newsAPiToJson(List<NewsAPi> data) =>
+//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 NewsAPi newsAPiFromJson(String str) => NewsAPi.fromJson(json.decode(str));
 
 String newsAPiToJson(NewsAPi data) => json.encode(data.toJson());
