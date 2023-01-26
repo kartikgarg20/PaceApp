@@ -4,6 +4,10 @@
 
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
+import 'dart:io' as Io;
+import 'package:http/http.dart' as http;
+
 // List<NewsAPi> newsAPiFromJson(Map<String, dynamic> json) =>
 //     List<NewsAPi>.from(json.decode(json).map((x) => NewsAPi.fromJson(x)));
 
@@ -91,13 +95,18 @@ class Article {
         "publishedAt": publishedAt!.toIso8601String(),
         "content": content,
       };
-  Map<String, dynamic> toMap() => {
+  Future<Map<String, dynamic>> toMap() async => {
         "source": source!.toJson(),
         "author": author,
         "title": title,
         "description": description,
         "url": url,
-        "urlToImage": urlToImage,
+        "urlToImage": await networkImageToBase64(urlToImage!),
+
+        // (await NetworkAssetBundle(Uri.parse(urlToImage!))
+        //     .load(urlToImage!))
+        //     .buffer
+        //     .asUint8List(),
         "publishedAt": publishedAt!.toIso8601String(),
         "content": content,
       };
@@ -116,9 +125,23 @@ class Source {
         id: json["id"],
         name: json["name"],
       );
+  factory Source.fromMap(Map<String, dynamic> json) => Source(
+        id: json["id"],
+        name: json["name"],
+      );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
       };
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "name": name,
+      };
+}
+
+Future<String?> networkImageToBase64(String imageUrl) async {
+  http.Response response = await http.get(Uri.parse(imageUrl));
+  final bytes = response.bodyBytes;
+  return (bytes != null ? base64Encode(bytes) : null);
 }

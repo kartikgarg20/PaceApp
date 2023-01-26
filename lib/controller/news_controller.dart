@@ -26,6 +26,7 @@ class NewsController extends GetxController {
     bool result = await InternetConnectionChecker().hasConnection;
     if (result == true) {
       fetchNews1();
+      netResult(true);
 
       print('YAY! Free cute dog pics!');
     } else {
@@ -34,6 +35,7 @@ class NewsController extends GetxController {
       if (news1 != null) {
         articleList.value = news1;
       }
+      isLoading(false);
 
       print('No internet :( Reason:');
     }
@@ -43,9 +45,6 @@ class NewsController extends GetxController {
     var handler = DataBase();
     await handler.deleteModel();
     await handler.initializedDB();
-    for (var i = 0; i < newsList.value!.articles.length; i++) {
-      await handler.insertArticle(newsList.value!.articles[i]);
-    }
   }
 
   void fetchNews1() async {

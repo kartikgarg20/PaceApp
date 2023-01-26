@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:pace_app/models/new_api.dart';
@@ -9,12 +10,11 @@ class DataBase {
     String path = await getDatabasesPath();
     print(path);
     return openDatabase(
-      join(path, 'newsarticle2.db'),
+      join(path, 'newsarticle5.db'),
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute("""
   CREATE TABLE IF NOT EXISTS article (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
         source TEXT,
         author TEXT NULL,
         title TEXT,
@@ -37,8 +37,9 @@ class DataBase {
   Future<int> insertArticle(Article article) async {
     int result = 0;
     final Database db = await initializedDB();
+    var new2 = await article.toMap();
 
-    result = await db.insert('article', article.toMap(),
+    result = await db.insert('article', new2,
         conflictAlgorithm: ConflictAlgorithm.replace);
 
     print('instering data ');
@@ -59,12 +60,25 @@ class DataBase {
     final List<Map<String, dynamic>> maps = await db.query('article');
 
     return List.generate(maps.length, (i) {
+      // String x = maps[i]['source']['name'] as String;
+      // print(x);
+      var data = maps[i]['source'];
+
+      var dataSp = data.split(',');
+
+      Map<String, String> mapData = Map();
+
+      dataSp.forEach(
+          (element) => mapData[element.split('=')[0]] = element.split('=')[1]);
+      print(mapData.runtimeType);
+
       return Article(
-          source: maps[i]['source'],
+          source: Source(id: null, name: mapData.values.elementAt(0)),
           title: maps[i]['title'],
           description: maps[i]['description'],
           url: maps[i]['url'],
-          publishedAt: maps[i]['publishedAt'],
+          urlToImage: maps[i]['urlToImage'],
+          publishedAt: DateTime.parse(maps[i]['publishedAt']),
           content: maps[i]['content']);
     });
   }
