@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:pace_app/controller/news_controller.dart';
-import 'package:pace_app/models/new_api.dart';
 
 class NewsPage extends StatefulWidget {
   final int index;
@@ -21,6 +19,8 @@ class _NewsPageState extends State<NewsPage> {
       body: SafeArea(
           child: Stack(
         children: [
+          Image.network(_newsController
+              .newsList.value!.articles[widget.index].urlToImage!),
           Text("hello"),
         ],
       )),

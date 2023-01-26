@@ -27,20 +27,31 @@ class Headline extends StatelessWidget {
                         onTap: () {
                           print(
                               _newsController.newsList.value!.articles[index]);
-                          // Get.to(NewsPage(
-                          //     index: _newsController
-                          //         .newsList.value!.articles[index]));
+                          Get.to(() => NewsPage(index: index));
                         },
                         child: Container(
-                          height: 50,
+                          height: 250,
                           width: 100,
-                          color: Colors.black,
-                          child: Center(
-                            child: Text(
-                              _newsController
-                                  .newsList.value!.articles[index].title!,
-                              style: TextStyle(color: Colors.white),
-                            ),
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Stack(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Image.network(_newsController.newsList
+                                    .value!.articles[index].urlToImage!),
+                              ),
+                              Center(
+                                child: Text(
+                                  _newsController
+                                      .newsList.value!.articles[index].title!,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ));
