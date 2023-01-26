@@ -92,6 +92,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "internet_connection_checker",
+      "rootUri": "file:///C:/Users/user/AppData/Local/flutter/.pub-cache/hosted/pub.dartlang.org/internet_connection_checker-1.0.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "lints",
       "rootUri": "file:///C:/Users/user/AppData/Local/flutter/.pub-cache/hosted/pub.dartlang.org/lints-2.0.1",
       "packageUri": "lib/",
@@ -266,7 +272,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-01-26T09:39:49.685346Z",
+  "generated": "2023-01-26T13:46:06.073431Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }

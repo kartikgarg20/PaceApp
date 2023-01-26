@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:pace_app/models/new_api.dart';
 
 class RemoteService {
-  List<NewsAPi> newsList = [];
   static var client = http.Client();
 
   static Future<NewsAPi?> fetchNews() async {
